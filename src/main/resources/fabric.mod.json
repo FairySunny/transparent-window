@@ -1,0 +1,38 @@
+{
+	"schemaVersion": 1,
+	"id": "transparentwindow",
+	"version": "${version}",
+	"name": "Transparent Window",
+	"description": "Make your Minecraft window transparent",
+	"authors": [
+		"Sunny"
+	],
+	"contact": {
+		"homepage": "https://github.com/FairySunny/transparent-window",
+		"sources": "https://github.com/FairySunny/transparent-window"
+	},
+	"license": "GPL-3.0",
+	"icon": "assets/transparentwindow/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+		],
+		"client": [
+		]
+	},
+	"mixins": [
+		{
+			"config": "transparentwindow.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.0",
+		"minecraft": "~1.20.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
