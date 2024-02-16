@@ -10,10 +10,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @SuppressWarnings("unused")
 @Mixin(TabButtonWidget.class)
 public class TabButtonWidgetMixin {
-    private static final ButtonTextures TAB_BUTTON_TEXTURES = new ButtonTextures(new Identifier("widget/button"), new Identifier("widget/button_disabled"), new Identifier("widget/button_highlighted"));
-
-    @Redirect(method = "renderWidget", at = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/widget/TabButtonWidget;TAB_BUTTON_TEXTURES:Lnet/minecraft/client/gui/screen/ButtonTextures;"))
-    private ButtonTextures redirectRenderWidgetTexture() {
-        return TAB_BUTTON_TEXTURES;
+    @Redirect(method = "<clinit>", at = @At(value = "NEW", target = "Lnet/minecraft/client/gui/screen/ButtonTextures;"))
+    private static ButtonTextures redirectStaticTexture(Identifier enabled, Identifier disabled, Identifier enabledFocused, Identifier disabledFocused) {
+        return new ButtonTextures(new Identifier("widget/button"), new Identifier("widget/button_disabled"), new Identifier("widget/button_highlighted"));
     }
 }

@@ -8,9 +8,7 @@
 		"SplashOverlayMixin",
 		"ScreenMixin",
 		"CreateWorldScreenMixin",
-		"ExperimentsScreenMixin",
 		"TitleScreenMixin",
-		"EntryListWidgetMixin",
 		"TabButtonWidgetMixin",
 		"TabNavigationWidgetMixin"
 	],
