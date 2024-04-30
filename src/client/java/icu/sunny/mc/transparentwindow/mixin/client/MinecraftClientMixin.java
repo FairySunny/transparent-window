@@ -1,5 +1,6 @@
 package icu.sunny.mc.transparentwindow.mixin.client;
 
+import com.mojang.blaze3d.platform.GlConst;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.systems.VertexSorter;
@@ -62,12 +63,19 @@ public class MinecraftClientMixin {
     }
 
     @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gl/Framebuffer;draw(II)V"))
-    private void redirectRenderFramebuffer(Framebuffer framebuffer, int width, int height) {
+    private void redirectRenderFramebuffer(Framebuffer framebuffer, int width, int height, boolean tick) {
         RenderSystem.assertOnGameThreadOrInit();
-        if (!RenderSystem.isInInitPhase()) {
-            RenderSystem.recordRenderCall(() -> framebufferDrawInternalWithAlpha(framebuffer, width, height));
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (!client.skipGameRender && tick && client.world != null) {
+            RenderSystem.clearColor(0, 0, 0, 1);
+            RenderSystem.clear(GlConst.GL_COLOR_BUFFER_BIT, MinecraftClient.IS_SYSTEM_MAC);
+            framebuffer.draw(width, height);
         } else {
-            framebufferDrawInternalWithAlpha(framebuffer, width, height);
+            if (!RenderSystem.isInInitPhase()) {
+                RenderSystem.recordRenderCall(() -> framebufferDrawInternalWithAlpha(framebuffer, width, height));
+            } else {
+                framebufferDrawInternalWithAlpha(framebuffer, width, height);
+            }
         }
     }
 }
