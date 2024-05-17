@@ -4,7 +4,6 @@ import com.mojang.blaze3d.platform.GlConst;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.systems.VertexSorter;
-import icu.sunny.mc.transparentwindow.client.texture.TransparentTexture;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.Framebuffer;
 import net.minecraft.client.gl.ShaderProgram;
@@ -19,11 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @SuppressWarnings("unused")
 @Mixin(MinecraftClient.class)
 public class MinecraftClientMixin {
-    @Inject(method = "<init>", at = @At("TAIL"))
-    private void injectConstructor(CallbackInfo info) {
-        TransparentTexture.register();
-    }
-
     @Inject(method = "render", at = @At("HEAD"))
     private void injectRender(CallbackInfo info) {
         RenderSystem.clearColor(0, 0, 0, 0);
