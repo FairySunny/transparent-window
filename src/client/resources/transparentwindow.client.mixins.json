@@ -6,8 +6,8 @@
 		"WindowMixin",
 		"MinecraftClientMixin",
 		"SplashOverlayMixin",
-		"ScreenMixin",
-		"TitleScreenMixin"
+		"RotatingCubeMapRendererMixin",
+		"ScreenMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
