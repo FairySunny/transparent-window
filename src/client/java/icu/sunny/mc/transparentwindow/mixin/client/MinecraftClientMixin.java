@@ -20,12 +20,12 @@ import java.util.Objects;
 public class MinecraftClientMixin {
     @Inject(method = "render", at = @At("HEAD"))
     private void injectRender(CallbackInfo info) {
-        RenderSystem.clearColor(0, 0, 0, 0);
         MinecraftClient.getInstance().getFramebuffer().clear(MinecraftClient.IS_SYSTEM_MAC);
     }
 
-    private static void framebufferDrawInternalWithAlpha(Framebuffer framebuffer, int width, int height) {
+    private static void framebufferDrawInternal(Framebuffer framebuffer, int width, int height, boolean withAlpha) {
         RenderSystem.assertOnRenderThread();
+        GlStateManager._colorMask(true, true, true, withAlpha);
         GlStateManager._disableDepthTest();
         GlStateManager._depthMask(false);
         GlStateManager._viewport(0, 0, width, height);
@@ -43,17 +43,17 @@ public class MinecraftClientMixin {
         BufferRenderer.draw(bufferBuilder.end());
         shaderProgram.unbind();
         GlStateManager._depthMask(true);
+        GlStateManager._colorMask(true, true, true, true);
     }
 
     @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gl/Framebuffer;draw(II)V"))
     private void redirectRenderFramebuffer(Framebuffer framebuffer, int width, int height, boolean tick) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        if (!client.skipGameRender && client.isFinishedLoading() && tick && client.world != null) {
-            RenderSystem.clearColor(0, 0, 0, 1);
-            RenderSystem.clear(GlConst.GL_COLOR_BUFFER_BIT, MinecraftClient.IS_SYSTEM_MAC);
-            framebuffer.draw(width, height);
+        if (tick && MinecraftClient.getInstance().world != null) {
+            GlStateManager._clearColor(0, 0, 0, 1);
+            GlStateManager._clear(GlConst.GL_COLOR_BUFFER_BIT, MinecraftClient.IS_SYSTEM_MAC);
+            framebufferDrawInternal(framebuffer, width, height, false);
         } else {
-            framebufferDrawInternalWithAlpha(framebuffer, width, height);
+            framebufferDrawInternal(framebuffer, width, height, true);
         }
     }
 }
