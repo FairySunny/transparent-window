@@ -1,16 +1,17 @@
 package icu.sunny.mc.transparentwindow.mixin.client;
 
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.CubeMapRenderer;
 import net.minecraft.client.gui.RotatingCubeMapRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 @SuppressWarnings("unused")
 @Mixin(RotatingCubeMapRenderer.class)
 public class RotatingCubeMapRendererMixin {
-    @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/CubeMapRenderer;draw(Lnet/minecraft/client/MinecraftClient;FFF)V"))
-    private void redirectRenderCubeMap(CubeMapRenderer cubeMap, MinecraftClient client, float x, float y, float alpha) {
+    @WrapWithCondition(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/CubeMapRenderer;draw(Lnet/minecraft/client/MinecraftClient;FF)V"))
+    private boolean wrapRenderCubeMap(CubeMapRenderer instance, MinecraftClient client, float x, float y) {
+        return false;
     }
 }
