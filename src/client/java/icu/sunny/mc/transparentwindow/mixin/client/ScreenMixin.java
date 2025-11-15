@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Screen.class)
 public class ScreenMixin {
     @Inject(method = "renderDarkening(Lnet/minecraft/client/gui/DrawContext;IIII)V", at = @At("HEAD"), cancellable = true)
-    private void injectRenderDarkening(CallbackInfo info) {
+    private void skipDarkening(CallbackInfo info) {
         if (MinecraftClient.getInstance().world == null) {
             info.cancel();
         }

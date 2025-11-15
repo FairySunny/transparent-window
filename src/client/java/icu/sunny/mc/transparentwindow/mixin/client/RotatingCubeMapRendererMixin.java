@@ -11,6 +11,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(RotatingCubeMapRenderer.class)
 public class RotatingCubeMapRendererMixin {
     @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/CubeMapRenderer;draw(Lnet/minecraft/client/MinecraftClient;FFF)V"))
-    private void redirectRenderCubeMap(CubeMapRenderer cubeMap, MinecraftClient client, float x, float y, float alpha) {
+    private void skipCubeMap(CubeMapRenderer cubeMap, MinecraftClient client, float x, float y, float alpha) {
     }
 }
