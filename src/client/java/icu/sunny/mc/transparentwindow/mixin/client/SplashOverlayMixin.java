@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @SuppressWarnings("unused")
 @Mixin(SplashOverlay.class)
-public class SplashOverlayMixin {
+public abstract class SplashOverlayMixin {
     @WrapWithCondition(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/Screen;render(Lnet/minecraft/client/gui/DrawContext;IIF)V"))
     private boolean shouldRenderScreen(Screen screen, DrawContext context, int mouseX, int mouseY, float delta) {
         return MinecraftClient.getInstance().world != null;

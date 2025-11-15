@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @SuppressWarnings("unused")
 @Mixin(MinecraftClient.class)
-public class MinecraftClientMixin {
+public abstract class MinecraftClientMixin {
     @Inject(method = "render", at = @At("HEAD"))
     private void clearFramebuffer(CallbackInfo info) {
         MinecraftClient.getInstance().getFramebuffer().clear();
