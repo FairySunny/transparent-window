@@ -11,9 +11,9 @@
 		"homepage": "https://github.com/FairySunny/transparent-window",
 		"sources": "https://github.com/FairySunny/transparent-window"
 	},
-	"license": "GPL-3.0",
+	"license": "MIT",
 	"icon": "assets/transparentwindow/icon.png",
-	"environment": "*",
+	"environment": "client",
 	"entrypoints": {
 		"main": [
 		],
