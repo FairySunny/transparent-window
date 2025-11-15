@@ -9,9 +9,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @SuppressWarnings("unused")
 @Mixin(Window.class)
-public class WindowMixin {
+public abstract class WindowMixin {
     @Inject(method = "<init>", at = @At(value = "INVOKE", target = "glfwCreateWindow", remap = false))
-    private void injectConstructor(CallbackInfo info) {
+    private void enableTransparency(CallbackInfo info) {
         GLFW.glfwWindowHint(GLFW.GLFW_TRANSPARENT_FRAMEBUFFER, GLFW.GLFW_TRUE);
     }
 }
