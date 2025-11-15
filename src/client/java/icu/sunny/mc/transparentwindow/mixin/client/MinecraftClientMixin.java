@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @SuppressWarnings("unused")
 @Mixin(MinecraftClient.class)
-public class MinecraftClientMixin {
+public abstract class MinecraftClientMixin {
     @Inject(method = "render", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/client/gl/Framebuffer;blitToScreen()V"))
     private void setFinalAlpha(boolean tick, CallbackInfo info) {
         if (tick && MinecraftClient.getInstance().world != null) {

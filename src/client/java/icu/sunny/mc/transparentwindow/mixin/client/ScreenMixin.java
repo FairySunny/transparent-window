@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @SuppressWarnings("unused")
 @Mixin(Screen.class)
-public class ScreenMixin {
+public abstract class ScreenMixin {
     @Inject(method = "renderDarkening(Lnet/minecraft/client/gui/DrawContext;IIII)V", at = @At("HEAD"), cancellable = true)
     private void skipDarkening(CallbackInfo info) {
         if (MinecraftClient.getInstance().world == null) {
