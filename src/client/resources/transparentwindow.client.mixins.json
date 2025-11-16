@@ -6,9 +6,9 @@
 		"WindowMixin",
 		"MinecraftClientMixin",
 		"SplashOverlayMixin",
+		"RotatingCubeMapRendererMixin",
 		"ScreenMixin",
 		"CreateWorldScreenMixin",
-		"TitleScreenMixin",
 		"TabButtonWidgetMixin",
 		"TabNavigationWidgetMixin"
 	],
