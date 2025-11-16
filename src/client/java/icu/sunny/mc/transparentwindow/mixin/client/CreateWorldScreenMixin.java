@@ -9,9 +9,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @SuppressWarnings("unused")
 @Mixin(CreateWorldScreen.class)
-public class CreateWorldScreenMixin {
+public abstract class CreateWorldScreenMixin {
     @Redirect(method = "<clinit>", at = @At(value = "NEW", target = "Lnet/minecraft/util/Identifier;"))
-    private static Identifier redirectStaticTexture(String id) {
+    private static Identifier getTransparentTexture(String id) {
         return TransparentTexture.TEXTURE;
     }
 }
