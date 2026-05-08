@@ -4,9 +4,9 @@
 	"compatibilityLevel": "JAVA_21",
 	"client": [
 		"WindowMixin",
-		"MinecraftClientMixin",
-		"SplashOverlayMixin",
-		"RotatingCubeMapRendererMixin",
+		"MinecraftMixin",
+		"LoadingOverlayMixin",
+		"PanoramaRendererMixin",
 		"ScreenMixin"
 	],
 	"injectors": {
