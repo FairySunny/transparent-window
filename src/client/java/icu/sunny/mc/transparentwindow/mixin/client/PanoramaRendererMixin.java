@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(PanoramaRenderer.class)
 public abstract class PanoramaRendererMixin {
     @WrapWithCondition(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/CubeMap;render(Lnet/minecraft/client/Minecraft;FF)V"))
-    private boolean shouldDrawCubeMap(CubeMap cubeMap, Minecraft minecraft, float x, float y) {
+    private boolean shouldRenderCubeMap(CubeMap cubeMap, Minecraft minecraft, float x, float y) {
         return false;
     }
 }
