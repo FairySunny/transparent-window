@@ -1,15 +1,18 @@
 {
 	"required": true,
 	"package": "icu.sunny.mc.transparentwindow.mixin.client",
-	"compatibilityLevel": "JAVA_21",
+	"compatibilityLevel": "JAVA_25",
 	"client": [
-		"WindowMixin",
+		"GlBackendMixin",
 		"MinecraftMixin",
 		"LoadingOverlayMixin",
-		"PanoramaRendererMixin",
+		"PanoramaMixin",
 		"ScreenMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
 	}
 }

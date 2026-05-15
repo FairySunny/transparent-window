@@ -12,10 +12,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @SuppressWarnings("unused")
 @Mixin(Minecraft.class)
 public abstract class MinecraftMixin {
-    @Inject(method = "runTick", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lcom/mojang/blaze3d/pipeline/RenderTarget;blitToScreen()V"))
+    @Inject(method = "renderFrame", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lcom/mojang/blaze3d/pipeline/RenderTarget;blitToScreen()V"))
     private void setFinalAlpha(boolean tick, CallbackInfo info) {
         if (tick && Minecraft.getInstance().level != null) {
-            GlStateManager._colorMask(false, false, false, true);
+            GlStateManager._colorMask(8);
             GL11.glClearColor(0, 0, 0, 1);
             GlStateManager._clear(GlConst.GL_COLOR_BUFFER_BIT);
         }
